@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.syh.dao.PermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.syh.bean.Permission" >
+    <id column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="pname" property="pname" jdbcType="VARCHAR" />
+    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="parentid" property="parentid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    pid, pname, path, type, parentid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from Permission
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Permission
+    where pid = #{pid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.syh.bean.Permission" >
+    insert into Permission (pid, pname, path, 
+      type, parentid)
+    values (#{pid,jdbcType=INTEGER}, #{pname,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{parentid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.syh.bean.Permission" >
+    insert into Permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="pname != null" >
+        pname,
+      </if>
+      <if test="path != null" >
+        path,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="parentid != null" >
+        parentid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="pname != null" >
+        #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.syh.bean.Permission" >
+    update Permission
+    <set >
+      <if test="pname != null" >
+        pname = #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        parentid = #{parentid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.syh.bean.Permission" >
+    update Permission
+    set pname = #{pname,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      parentid = #{parentid,jdbcType=INTEGER}
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+</mapper>

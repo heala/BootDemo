@@ -1,0 +1,44 @@
+server:
+    port: 80
+    tomcat:
+        uri-encoding: utf-8
+spring:
+    datasource:
+        driver-class-name: com.mysql.jdbc.Driver
+        username: yhshang
+        password: Yhshang1@
+        url: jdbc:mysql://192.168.100.131:3306/irs?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true
+        type: com.alibaba.druid.pool.DruidDataSource
+        initialize: true
+    devtools:
+        restart:
+             enabled: true
+    redis:
+        host: 192.168.100.131
+        port: 6379
+        pool:
+          max-idle: 8
+          max-active: 8
+          max-wait: -1
+          min-idle: 1
+        password: abcd1234
+    cache:
+      type: redis
+    thymeleaf:
+      cache: true
+      prefix: classpath:/templates/
+      suffix: .html
+      content-type: text/html
+
+mybatis:
+    # 搜索指定包别名
+    typeAliasesPackage: com.syh.bean
+    # 配置mapper的扫描，找到所有的mapper.xml映射文件
+    mapperLocations: classpath:mybatis/**/*Mapper.xml
+    # 加载全局的配置文件
+    configLocation: classpath:mybatis/mybatis-config.xml
+
+logging:
+  level:
+    org.springframework: WARN
+    com.syh: debug
